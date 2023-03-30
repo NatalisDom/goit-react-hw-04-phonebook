@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import css from 'components/ItemContact/ItemContact.module.css';
+import css from 'components/Item/Item.module.css';
 
-export const ItemContact = ({ visibleContact, onDeleteContact }) => {
+export const Item = ({ visibleContact, onDeleteContact }) => {
   return (
     <>
       {visibleContact.map(({ id, name, number }) => (
@@ -22,7 +22,7 @@ export const ItemContact = ({ visibleContact, onDeleteContact }) => {
   );
 };
 
-ItemContact.propTypes = {
+Item.propTypes = {
   visibleContact: PropTypes.array.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };

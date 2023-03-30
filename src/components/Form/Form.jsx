@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import css from 'components/formContact/FormContact.module.css';
+import css from 'components/Form/Form.module.css';
 
 
 export const Form = ({ onSubmit }) => {

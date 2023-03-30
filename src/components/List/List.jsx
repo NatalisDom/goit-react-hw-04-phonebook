@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-export const ListContact = ({ children }) => {
+export const List = ({ children }) => {
   return <ul>{children}</ul>;
 };
 
-ListContact.propTypes = {
+List.propTypes = {
   children: PropTypes.element.isRequired,
 };
