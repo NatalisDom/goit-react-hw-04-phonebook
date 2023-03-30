@@ -1,40 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from 'components/formContact/FormContact.module.css';
 
-class FormContact extends Component {
-  state = {
-    name: '',
-    number: '',
+
+export const Form = ({ onSubmit }) => {
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
+
+  
+  const changeForm = e => {
+    e.preventDefault();
+    onSubmit(name, number);
+    reset();
   };
 
-  handleSubmit = evt => {
-    evt.preventDefault();
-    const { name, number } = this.state;
-    this.props.onSubmit(name, number);
-    this.reset();
+  const reset = () => {
+    setName('');
+    setNumber('');
   };
 
-  reset() {
-    this.setState({ name: '', number: '' });
-  }
-
-  handleChange = evt => {
-    const { name, value } = evt.target;
-    this.setState({ [name]: value });
+  const nameChange = e => {
+    setName(e.target.value);
   };
 
-  render() {
-    const { name, number } = this.state;
+  const numberChange = e => {
+    setNumber(e.target.value);
+  };
 
-    return (
-      <form className={css.form} onSubmit={this.handleSubmit}>
+     return (
+      <form className={css.form} onSubmit={changeForm}>
         <label className={css.text}>
           Name
           <input
             className={css.input}
             value={name}
-            onChange={this.handleChange}
+            onChange={nameChange}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -48,7 +48,7 @@ class FormContact extends Component {
           <input
             className={css.input}
             value={number}
-            onChange={this.handleChange}
+            onChange={numberChange}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -57,16 +57,16 @@ class FormContact extends Component {
           />
         </label>
 
-        <button className={css.btn} type="submit">
+        <button type="submit" disabled={name === '' || number === ''}>
           Add contact
         </button>
       </form>
     );
   }
-}
 
-FormContact.propTypes = {
+
+Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default FormContact;
+export default Form;
